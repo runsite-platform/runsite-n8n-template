@@ -1,0 +1,26 @@
+{
+  "name": "n8n",
+  "description": "Workflow automation with 400+ integrations: webhooks, schedules, Telegram, Google Sheets, HTTP, AI. Runs in your own account with a managed Postgres. n8n is fair-code software by n8n GmbH, distributed under the Sustainable Use License.",
+  "language": "javascript",
+  "framework": "n8n",
+  "category": "automation",
+  "repo_url": "https://github.com/runsite-platform/runsite-n8n-template",
+  "github_template_repo": "runsite-platform/runsite-n8n-template",
+  "tags": ["n8n", "automation", "workflow", "no-code", "webhooks"],
+  "default_branch": "main",
+  "port": 5678,
+  "service_type": "web_service",
+  "requires_database": true,
+  "requires_redis": false,
+  "requires_s3": false,
+  "requires_email": false,
+  "default_project_name": "n8n",
+  "default_web_service_name": "n8n",
+  "default_database_name": "n8n-db",
+  "env_mappings": {
+    "DATABASE_URL": { "source": "postgresql_internal_url" },
+    "N8N_ENCRYPTION_KEY": { "source": "random", "length": 48 },
+    "PUBLIC_URL": { "source": "web_service_public_url" },
+    "GENERIC_TIMEZONE": { "source": "literal", "value": "Europe/Kyiv" }
+  }
+}

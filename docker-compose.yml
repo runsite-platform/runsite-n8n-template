@@ -1,0 +1,25 @@
+# Local check that mirrors the Runsite deploy: one Postgres + the n8n image.
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: n8n
+      POSTGRES_PASSWORD: "p@ss:w/rd#1"
+      POSTGRES_DB: n8n
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+
+  n8n:
+    build: .
+    depends_on:
+      - postgres
+    ports:
+      - "5678:5678"
+    environment:
+      DATABASE_URL: "postgresql://n8n:p%40ss%3Aw%2Frd%231@postgres:5432/n8n"
+      N8N_ENCRYPTION_KEY: "local-dev-key-change-me-0123456789"
+      PUBLIC_URL: "http://localhost:5678"
+      N8N_SECURE_COOKIE: "false"
+
+volumes:
+  postgres-data:
